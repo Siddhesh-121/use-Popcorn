@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from "react";
 import StarRating from "./StarRating";
-import { useLocalStorageState } from "./useLocalStorageState";
 
 const average = (arr) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
@@ -14,8 +13,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-
-  const [watched, setWatched] = useLocalStorageState([], "watched");
+  const [watched, setWatched] = useState([]);
 
   useEffect(
     function () {
@@ -372,6 +370,28 @@ function MovieDetails({
     </div>
   );
 }
+
+// function WatchedBox() {
+//   const [isOpen2, setIsOpen2] = useState(true);
+//   const [watched, setWatched] = useState(tempWatchedData);
+
+//   return (
+//     <div className="box">
+//       <button
+//         className="btn-toggle"
+//         onClick={() => setIsOpen2((open) => !open)}
+//       >
+//         {isOpen2 ? "–" : "+"}
+//       </button>
+//       {isOpen2 && (
+//         <>
+// <WatchedSummary watched={watched} />
+// <WatchedMoviesList watched={watched} />
+//         </>
+//       )}
+//     </div>
+//   );
+// }
 
 function WatchedMoviesList({ watched, onDeleteWatched }) {
   return (
